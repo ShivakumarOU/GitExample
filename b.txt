@@ -1,0 +1,336 @@
+R22 B.Tech. CSE Syllabus JNTU Hyderabad B.Tech. III Year II Sem.
+CS604PC: MACHINE LEARNING LAB
+L T P C
+0 0 2 1
+Course Objective:
+• The objective of this lab is to get an overview of the various machine learning techniques and can demonstrate them using python.
+Course Outcomes:
+• Understand modern notions in predictive data analysis
+• Select data, model selection, model complexity and identify the trends
+• Understand a range of machine learning algorithms along with their strengths and weaknesses
+• Build predictive models from data and analyze their performance
+List of Experiments
+1. Write a python program to compute Central Tendency Measures: Mean, Median, Mode Measure of Dispersion: Variance, Standard Deviation
+2. Study of Python Basic Libraries such as Statistics, Math, Numpy and Scipy
+3. Study of Python Libraries for ML application such as Pandas and Matplotlib
+4. Write a Python program to implement Simple Linear Regression
+5. Implementation of Multiple Linear Regression for House Price Prediction using sklearn
+6. Implementation of Decision tree using sklearn and its parameter tuning
+7. Implementation of KNN using sklearn
+8. Implementation of Logistic Regression using sklearn
+9. Implementation of K-Means Clustering
+10. Performance analysis of Classification Algorithms on a specific dataset (Mini Project)
+TEXT BOOK:
+1. Machine Learning – Tom M. Mitchell, - MGH.
+REFERENCE BOOK:
+1. Machine Learning: An Algorithmic Perspective, Stephen Marshland, Taylor & Francis.
+1. Write a python program to compute Central Tendency Measures: Mean, Median, Mode Measure of Dispersion: Variance, Standard Deviation
+Program:
+import statistics # Function to compute measures of central tendency and dispersion def compute_central_tendency_and_dispersion(data): # Check if the dataset is empty if not data: return "The dataset is empty. Please provide valid data." # Central Tendency Measures # Calculate the mean (average of the data) mean = statistics.mean(data) # Calculate the median (middle value of the sorted data) median = statistics.median(data) # Try to calculate the mode (most frequently occurring value) try: mode = statistics.mode(data) except statistics.StatisticsError: # Handle cases where no unique mode exists mode = "No unique mode" # Measures of Dispersion # Calculate the variance (average of squared differences from the mean) variance = statistics.variance(data) if len(data) > 1 else "Variance undefined (single data point)" # Calculate the standard deviation (square root of variance) std_deviation = statistics.stdev(data) if len(data) > 1 else "Standard deviation undefined (single data point)" # Store the results in a dictionary result = { "Mean": mean, "Median": median, "Mode": mode, "Variance": variance, "Standard Deviation": std_deviation, } return result
+# Example usage if __name__ == "__main__": # Example dataset dataset = [4, 8, 6, 5, 3, 8, 7, 8, 9] # Compute the results results = compute_central_tendency_and_dispersion(dataset) # Print the results print("Results for the given dataset:") for measure, value in results.items(): print(f"{measure}: {value}")
+Output:
+PS C:\Users\hp> & C:/Users/hp/AppData/Local/Programs/Python/Python313/python.exe "c:/Users/hp/Desktop/Machine Learning/ML LAB/program1.py"
+Results for the given dataset:
+Mean: 6.444444444444445
+Median: 7
+Mode: 8
+Variance: 4.277777777777778
+Standard Deviation: 2.0682789409984763
+PS C:\Users\hp>
+2. Study of Python Basic Libraries such as Statistics, Math, Numpy and Scipy
+Program on Statistics:
+import statistics as stats data = [10, 20, 20, 40, 50] print("Mean:", stats.mean(data)) print("Median:", stats.median(data)) print("Mode:", stats.mode(data)) print("Standard Deviation:",stats.stdev(data))
+Output:
+PS C:\Users\hp> & C:/Users/hp/AppData/Local/Programs/Python/Python313/python.exe "c:/Users/hp/Desktop/Machine Learning/ML LAB/stats_example.py"
+Mean: 28
+Median: 20
+Mode: 20
+Standard Deviation: 16.431676725154983
+Program on Math:
+import math x = 16 print("Square Root:", math.sqrt(x)) print("Factorial of 5:", math.factorial(5)) print("Log base 2 of 16:", math.log2(x)) print("Cosine of 45°:", math.cos(math.radians(45)))
+Output:
+PS C:\Users\hp> & C:/Users/hp/AppData/Local/Programs/Python/Python313/python.exe "c:/Users/hp/Desktop/Machine Learning/ML LAB/maths.py"
+Square Root: 4.0
+Factorial of 5: 120
+Log base 2 of 16: 4.0
+Cosine of 45°: 0.7071067811865476
+Program on Numpy:
+import numpy as np arr = np.array([1, 2, 3, 4, 5]) print("Array:", arr) print("Mean:", np.mean(arr)) print("Standard Deviation:", np.std(arr)) print("Element-wise Square:", arr**2) # Matrix multiplication matrix_a = np.array([[1, 2], [3, 4]]) matrix_b = np.array([[5, 6], [7, 8]]) print("Matrix Multiplication:\n", np.dot(matrix_a, matrix_b))
+Output:
+PS C:\Users\hp> & C:/Users/hp/AppData/Local/Programs/Python/Python313/python.exe "c:/Users/hp/Desktop/Machine Learning/ML LAB/numexample.py"
+Array: [1 2 3 4 5]
+Mean: 3.0
+Standard Deviation: 1.4142135623730951
+Element-wise Square: [ 1 4 9 16 25]
+Matrix Multiplication:
+[[19 22]
+[43 50]]
+Note: If NumPy is Not Installed
+If NumPy is not installed in your Python environment, you'll need to install it.
+Fix: Install NumPy Run this command in your terminal or command prompt: pip install numpy
+Program on Scipy: from scipy import integrate import numpy as np # Define a function for integration f = lambda x: x**2 result, error = integrate.quad(f, 0, 1) # Integrate f(x) = x^2 from 0 to 1 print("Integration Result:", result) print("Error Estimate:", error)
+Note: If Scipy is Not Installed
+If Scipy is not installed in your Python environment, you'll need to install it.
+Fix: Install Scipy Run this command in your terminal or command prompt:
+pip install scipy
+Output:
+PS C:\Users\hp> & C:/Users/hp/AppData/Local/Programs/Python/Python313/python.exe "c:/Users/hp/Desktop/Machine Learning/ML LAB/examplesci.py"
+Integration Result: 0.33333333333333337
+Error Estimate: 3.700743415417189e-15
+3. Study of Python Libraries for ML application such as Pandas and Matplotlib
+Note: If pandas is Not Installed
+If pandas is not installed in your Python environment, you'll need to install it.
+Fix: Install pandas Run this command in your terminal or command prompt:
+pip install pandas
+Program:
+import pandas as pd
+# Load the House Prices dataset
+url = "https://raw.githubusercontent.com/selva86/datasets/master/BostonHousing.csv"
+df = pd.read_csv(url)
+# Display dataset info
+print("\nDataset Summary:\n", df.info())
+# Display first 5 rows
+print("\nFirst 5 rows:\n", df.head())
+# Compute median price
+median_price = df["medv"].median()
+# Filter houses with price above median
+filtered_df = df.query("medv > @median_price")
+# Display number of filtered houses
+print(f"\nNumber of houses priced above median ({median_price}): {filtered_df.shape[0]}")
+# Show first 5 rows of filtered data
+print("\nFiltered Houses (Price > Median):\n", filtered_df.head())
+Output:
+
+Program:
+import matplotlib.pyplot as plt
+# Sample data
+x = [1, 2, 3, 4, 5]
+y = [10, 20, 25, 30, 50]
+plt.plot(x, y, marker='o', linestyle='--', color='r', label="Growth")
+plt.xlabel("X-axis Label")
+plt.ylabel("Y-axis Label")
+plt.title("Sample Line Plot")
+plt.legend()
+plt.show()
+Output:
+4. Write a Python program to implement Simple Linear Regression
+Note: If you don't have scikit-learn installed. You can install it using the following command:
+pip install scikit-learn
+Program:
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+# Generate sample data
+X = np.array([[1], [2], [3], [4], [5]])
+y = np.array([2, 4, 5, 4, 5])
+# Create and train the model
+model = LinearRegression()
+model.fit(X, y)
+# Predict values
+y_pred = model.predict(X)
+# Plot results
+plt.scatter(X, y, color='red', label='Actual')
+plt.plot(X, y_pred, color='blue', linewidth=2, label='Predicted')
+plt.xlabel('X')
+plt.ylabel('y')
+plt.legend()
+plt.title('Simple Linear Regression')
+plt.show()
+# Print model parameters
+print(f'Intercept: {model.intercept_}')
+print(f'Coefficient: {model.coef_[0]}')
+Output:
+
+5. Implementation of Multiple Linear Regression for House Price Prediction using sklearn
+Program:
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error
+# Sample dataset
+data = {
+'Square_Feet': [1400, 1600, 1700, 1875, 1100, 1550, 2350, 2450, 1425, 1700],
+'Bedrooms': [3, 4, 3, 4, 2, 3, 5, 4, 3, 3],
+'Age': [10, 15, 20, 18, 8, 12, 30, 25, 14, 19],
+'Price': [245000, 312000, 279000, 308000, 199000, 270000, 450000, 392000, 238000, 299000]
+}
+# Convert to DataFrame
+df = pd.DataFrame(data)
+# Features and target
+X = df[['Square_Feet', 'Bedrooms', 'Age']]
+y = df['Price']
+# Split the dataset
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Create and train the model
+model = LinearRegression()
+model.fit(X_train, y_train)
+# Predict on test set
+y_pred = model.predict(X_test)
+# Evaluate the model
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+print("Model Coefficients:", model.coef_)
+print("Model Intercept:", model.intercept_)
+print("Mean Absolute Error:", mae)
+print("Root Mean Squared Error:", rmse)
+Output:
+Model Coefficients: [ 54.20709271 31073.96378562 3837.78316715]
+Model Intercept: 36545.32293887774
+Mean Absolute Error: 14801.005911410059
+Root Mean Squared Error: 16796.363293508228
+6. Implementation of Decision tree using sklearn and its parameter tuning
+Program:
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import accuracy_score
+# Load dataset
+data = load_iris()
+X, y = data.data, data.target
+# Split dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Initialize Decision Tree Classifier
+dt = DecisionTreeClassifier()
+# Define parameter grid for tuning
+param_grid = {
+'criterion': ['gini', 'entropy'],
+'max_depth': [3, 5, 10, None],
+'min_samples_split': [2, 5, 10],
+'min_samples_leaf': [1, 2, 4]
+}
+# Perform Grid Search with Cross Validation
+grid_search = GridSearchCV(dt, param_grid, cv=5, scoring='accuracy', n_jobs=1)
+grid_search.fit(X_train, y_train)
+# Best parameters and best model
+best_params = grid_search.best_params_
+best_model = grid_search.best_estimator_
+# Predict on test set
+y_pred = best_model.predict(X_test)
+# Calculate accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print(f'Best Parameters: {best_params}')
+print(f'Accuracy: {accuracy:.4f}')
+Output:
+Best Parameters: {'criterion': 'entropy', 'max_depth': 5, 'min_samples_leaf': 4, 'min_samples_split': 2}
+Accuracy: 1.0000
+7. Implementation of KNN using sklearn
+Program:
+import pandas as pd
+from sklearn.neighbors import KNeighborsRegressor
+# Sample dataset
+df = pd.DataFrame({
+'Feature1': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+'Feature2': [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+'Target': [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
+})
+# Train KNN model
+model = KNeighborsRegressor(n_neighbors=3).fit(df[['Feature1', 'Feature2']], df['Target'])
+# Fix: Convert prediction input into a DataFrame with matching column names
+input_data = pd.DataFrame([[5, 6]], columns=['Feature1', 'Feature2'])
+y_pred = model.predict(input_data)
+print("Prediction for [5,6]:", y_pred[0])
+Output:
+Prediction for [5,6]: 60.0
+8. Implementation of Logistic Regression using sklearn
+Program:
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+# Sample dataset
+df = pd.DataFrame({
+'Feature1': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+'Feature2': [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+'Target': [0, 0, 0, 0, 1, 1, 1, 1, 1, 1] # Binary classification target
+})
+# Features and target
+X = df[['Feature1', 'Feature2']]
+y = df['Target']
+# Split the dataset
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Train Logistic Regression model
+model = LogisticRegression().fit(X_train, y_train)
+# Predict
+y_pred = model.predict(X_test)
+print("Predictions:", y_pred)
+Output:
+Predictions: [1 0]
+9. Implementation of K-Means Clustering
+Program:
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="joblib")
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_blobs
+# Generate synthetic data with 3 clusters
+X, _ = make_blobs(n_samples=300, centers=3, cluster_std=1.0, random_state=42)
+# Apply K-Means Clustering
+k = 3 # Number of clusters
+kmeans = KMeans(n_clusters=k, n_init=10, random_state=42)
+kmeans.fit(X)
+labels = kmeans.labels_
+centroids = kmeans.cluster_centers_
+# Plot the results
+plt.figure(figsize=(8, 6))
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis', marker='o', edgecolors='k', alpha=0.7)
+plt.scatter(centroids[:, 0], centroids[:, 1], c='red', marker='X', s=200, label='Centroids')
+plt.title("K-Means Clustering", fontsize=14)
+plt.xlabel("Feature 1", fontsize=12)
+plt.ylabel("Feature 2", fontsize=12)
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.5)
+plt.show()
+Output:
+
+10. Performance analysis of Classification Algorithms on a specific dataset
+Program:
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.datasets import make_classification
+def generate_synthetic_data():
+"""Generates a synthetic dataset."""
+X, y = make_classification(n_samples=1000, n_features=20, n_classes=2, random_state=42)
+return X, y
+def preprocess_data(X):
+"""Scales the features."""
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+return X_scaled
+def evaluate_model(model, X_train, X_test, y_train, y_test):
+"""Trains and evaluates a given model."""
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+metrics = {
+'Accuracy': accuracy_score(y_test, y_pred),
+'Precision': precision_score(y_test, y_pred, average='weighted', zero_division=1),
+'Recall': recall_score(y_test, y_pred, average='weighted'),
+'F1 Score': f1_score(y_test, y_pred, average='weighted')
+}
+return metrics
+def main():
+X, y = generate_synthetic_data()
+X = preprocess_data(X)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+models = {
+'Logistic Regression': LogisticRegression(),
+'Decision Tree': DecisionTreeClassifier(),
+'Random Forest': RandomForestClassifier(),
+'SVM': SVC()
+}
+results = {}
+for name, model in models.items():
+results[name] = evaluate_model(model, X_train, X_test, y_train, y_test)
+# Display results
+results_df = pd.DataFrame(results).T
+print(results_df)
+if __name__ == "__main__":
+main()
+Output:
